@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Sale } from "../../models/sale";
 import { BASE_URL } from "../../utils/request";
-import NotificayionButton from '../NotificationButton';
+import NotificationButton from '../NotificationButton';
 import './styles.css';
 
 function SalesCard() {
@@ -22,7 +22,6 @@ function SalesCard() {
         const dmin = minDate.toISOString().slice(0, 10);
         const dmax = maxDate.toISOString().slice(0, 10);
 
-        console.log(dmin);
 
         axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
@@ -70,18 +69,18 @@ function SalesCard() {
                         {sales.map(sale => {
                             return (
                                 <tr key={sale.id}>
-                                <td className="show992">{sale.id}</td>
-                                <td className="show576">{new Date(sale.date).toLocaleDateString()}</td>
-                                <td>{sale.sellerName}</td>
-                                <td className="show992">{sale.visited}</td>
-                                <td className="show992">{sale.deals}</td>
-                                <td>R$ {sale.amount.toFixed(2)}</td>
-                                <td>
-                                    <div className="dsmeta-red-btn-container">
-                                        <NotificayionButton />
-                                    </div>
-                                </td>
-                            </tr>
+                                    <td className="show992">{sale.id}</td>
+                                    <td className="show576">{new Date(sale.date).toLocaleDateString()}</td>
+                                    <td>{sale.sellerName}</td>
+                                    <td className="show992">{sale.visited}</td>
+                                    <td className="show992">{sale.deals}</td>
+                                    <td>R$ {sale.amount.toFixed(2)}</td>
+                                    <td>
+                                        <div className="dsmeta-red-btn-container">
+                                            <NotificationButton saleId={sale.id} />
+                                        </div>
+                                    </td>
+                                </tr>
                             )
                         })
 
